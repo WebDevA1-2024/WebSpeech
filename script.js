@@ -27,19 +27,13 @@ if (!window.SpeechRecognition) {
         const command = event.results[0][0].transcript.toLowerCase();
         resultDisplay.textContent = 'Anda berkata: ' + command;
 
-        // Perintah suara yang dikenal
-        if (command.includes('buka halaman utama')) {
-            window.location.href = 'index.html';
-        } else if (command.includes('cari film')) {
-            resultDisplay.textContent = 'Perintah belum diimplementasikan.';
-        } else if (command.includes('buka lk21')) {
-            window.open('https://tv4.lk21official.mom/', '_blank');
-        } else if (command.includes('buka instagram')) {
-            window.open('https://www.instagram.com/', '_blank');
-        } else if (command.includes('buka youtube')) {
-            window.open('https://www.youtube.com/', '_blank');
-        } else if (command.includes('buka akademik')) {
-            window.open('https://akademik.polban.ac.id/fotomhsrekap/221524018.jpg','_blank');
+        // Logika untuk mendeteksi perintah umum
+        if (command.includes('buka')) {
+            const site = command.replace('buka ', '').replace(' ', '');
+            window.open(`https://www.${site}`, '_blank');
+        } else if (command.includes('cari')) {
+            const query = command.replace('cari ', '');
+            window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
         } else {
             resultDisplay.textContent = 'Perintah tidak dikenal: ' + command;
         }
